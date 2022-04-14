@@ -19,6 +19,13 @@ export default class App extends Component {
     // 更新状态
     this.setState({ todos: newTodos })
   }
+  clearAll = () => {
+    if (this.state.todos.length === 0) {
+      return
+    }
+    const clearTodos = []
+    this.setState({ todos: clearTodos })
+  }
   render () {
     const { todos } = this.state
     return (
@@ -26,7 +33,7 @@ export default class App extends Component {
         <div className="todo-wrap">
           <Header addTodo={this.addTodo} />
           <List todos={todos} />
-          <Footer />
+          <Footer todos={todos} clearAll={this.clearAll} />
         </div>
       </div>
     )
