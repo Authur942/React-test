@@ -26,13 +26,22 @@ export default class App extends Component {
     const clearTodos = []
     this.setState({ todos: clearTodos })
   }
+
+  updateTodo = (id, done) => {
+    const { todos } = this.state
+    const newTodos = todos.map(todoObj => {
+      if (todoObj.id === id) return todoObj = { ...todoObj, done: done }
+      else return todoObj
+    })
+    this.setState({ todos: newTodos })
+  }
   render () {
     const { todos } = this.state
     return (
       <div className="todo-container">
         <div className="todo-wrap">
           <Header addTodo={this.addTodo} />
-          <List todos={todos} />
+          <List todos={todos} updateTodo={this.updateTodo} />
           <Footer todos={todos} clearAll={this.clearAll} />
         </div>
       </div>
