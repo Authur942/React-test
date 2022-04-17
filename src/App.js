@@ -9,7 +9,7 @@ export default class App extends Component {
   state = {
     todos: [
       { id: '01', name: '吃饭', done: false },
-      { id: '02', name: '睡觉', done: true },
+      { id: '02', name: '睡觉', done: false },
       { id: '03', name: '打代码', done: false }
     ]
   }
@@ -32,13 +32,22 @@ export default class App extends Component {
     this.setState({ todos: newTodos })
   }
 
+  // 全选checkBox事件回到
+  checkAllTodo = (done) => {
+    const { todos } = this.state
+    const newTodos = todos.map(todoObj => {
+      return { ...todoObj, done }
+    })
+    this.setState({ todos: newTodos })
+  }
+
   // 清除全部已完成
-  clearAll = () => {
-    if (this.state.todos.length === 0) {
-      return
-    }
-    const clearTodos = []
-    this.setState({ todos: clearTodos })
+  clearAllTodoDone = () => {
+    const { todos } = this.state
+    const newTodos = todos.filter(todoObj => {
+      return !todoObj.done
+    })
+    this.setState({ todos: newTodos })
   }
 
   // 更新todo项状态
@@ -58,7 +67,7 @@ export default class App extends Component {
         <div className="todo-wrap">
           <Header addTodo={this.addTodo} />
           <List todos={todos} updateTodo={this.updateTodo} deleteTodo={this.deleteTodo} />
-          <Footer todos={todos} clearAll={this.clearAll} />
+          <Footer todos={todos} clearAllTodoDone={this.clearAllTodoDone} checkAllTodo={this.checkAllTodo} />
         </div>
       </div>
     )

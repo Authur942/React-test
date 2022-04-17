@@ -1,3 +1,4 @@
+// Item
 import React, { Component } from 'react'
 import './index.css'
 
@@ -22,7 +23,7 @@ export default class Item extends Component {
   }
   // 删除按钮事件
   handleDelete = (id) => {
-    return () => {
+    if (window.confirm('确定要删除吗')) {
       this.props.deleteTodo(id)
     }
   }
@@ -33,10 +34,10 @@ export default class Item extends Component {
     return (
       <li style={{ backgroundColor: mouse ? '#ddd' : '#fff' }} onMouseEnter={this.handleMouse(true)} onMouseLeave={this.handleMouse(false)}>
         <label>
-          <input type="checkbox" defaultChecked={done} onChange={this.handleChange(id)} />
+          <input type="checkbox" checked={done} onChange={this.handleChange(id)} />
           <span>{name}</span>
         </label>
-        <button className="btn btn-danger" style={{ display: mouse ? 'block' : 'none' }} onClick={this.handleDelete(id)}>删除</button>
+        <button className="btn btn-danger" style={{ display: mouse ? 'block' : 'none' }} onClick={() => { this.handleDelete(id) }}>删除</button>
       </li >
     )
   }
