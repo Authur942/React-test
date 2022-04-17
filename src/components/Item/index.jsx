@@ -7,6 +7,7 @@ export default class Item extends Component {
     mouse: false
   }
 
+  // 鼠标移入/移出回调事件
   handleMouse = (flag) => {
     return () => {
       this.setState({ mouse: flag })
@@ -19,6 +20,12 @@ export default class Item extends Component {
       this.props.updateTodo(id, event.target.checked)
     }
   }
+  // 删除按钮事件
+  handleDelete = (id) => {
+    return () => {
+      this.props.deleteTodo(id)
+    }
+  }
 
   render () {
     const { id, name, done } = this.props
@@ -29,7 +36,7 @@ export default class Item extends Component {
           <input type="checkbox" defaultChecked={done} onChange={this.handleChange(id)} />
           <span>{name}</span>
         </label>
-        <button className="btn btn-danger" style={{ display: mouse ? 'block' : 'none' }} onClick={this.handleDelete}>删除</button>
+        <button className="btn btn-danger" style={{ display: mouse ? 'block' : 'none' }} onClick={this.handleDelete(id)}>删除</button>
       </li >
     )
   }

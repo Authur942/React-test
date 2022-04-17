@@ -3,9 +3,11 @@ import './index.css'
 
 export default class Footer extends Component {
 
+  // 清除全部已完成
   handleClearAll = () => {
     this.props.clearAll()
   }
+
   render () {
     const { todos } = this.props
     return (

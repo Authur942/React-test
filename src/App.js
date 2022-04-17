@@ -13,12 +13,26 @@ export default class App extends Component {
       { id: '03', name: '打代码', done: false }
     ]
   }
+
+  // 添加一个todo项
   addTodo = (todoObj) => {
     const { todos } = this.state
     const newTodos = [todoObj, ...todos]
     // 更新状态
     this.setState({ todos: newTodos })
   }
+
+  // 删除一个todo项
+  deleteTodo = (id) => {
+    const { todos } = this.state
+    // 匹配过滤todoObj.id !== id 返回一个新数组
+    const newTodos = todos.filter(todoObj => {
+      return todoObj.id !== id
+    })
+    this.setState({ todos: newTodos })
+  }
+
+  // 清除全部已完成
   clearAll = () => {
     if (this.state.todos.length === 0) {
       return
@@ -27,6 +41,7 @@ export default class App extends Component {
     this.setState({ todos: clearTodos })
   }
 
+  // 更新todo项状态
   updateTodo = (id, done) => {
     const { todos } = this.state
     const newTodos = todos.map(todoObj => {
@@ -35,13 +50,14 @@ export default class App extends Component {
     })
     this.setState({ todos: newTodos })
   }
+
   render () {
     const { todos } = this.state
     return (
       <div className="todo-container">
         <div className="todo-wrap">
           <Header addTodo={this.addTodo} />
-          <List todos={todos} updateTodo={this.updateTodo} />
+          <List todos={todos} updateTodo={this.updateTodo} deleteTodo={this.deleteTodo} />
           <Footer todos={todos} clearAll={this.clearAll} />
         </div>
       </div>
