@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 import Header from './components/Header';
 import List from './components/List';
 import Footer from './components/Footer'
@@ -22,7 +23,7 @@ export default class App extends Component {
     this.setState({ todos: newTodos })
   }
 
-  // 删除一个todo项
+  // 删除一个todo项isiklskfgidisiskgskoai
   deleteTodo = (id) => {
     const { todos } = this.state
     // 匹配过滤todoObj.id !== id 返回一个新数组
@@ -60,6 +61,30 @@ export default class App extends Component {
     this.setState({ todos: newTodos })
   }
 
+  // 请求todolist数据
+  getTodoListData = () => {
+    axios.get('http://localhost:3000/api1/todolist').then(
+      response => {
+        console.log('请求成功！', response.data)
+      },
+      err => {
+        console.log('请求失败了', err)
+      }
+    )
+  }
+
+  getCarData = () => {
+    axios.get('http://localhost:3000/api2/cars').then(
+      response => {
+        console.log('请求成功', response.data)
+      },
+      error => {
+        console.log('请求失败啦！', error)
+      }
+    )
+  }
+
+
   render () {
     const { todos } = this.state
     return (
@@ -68,6 +93,8 @@ export default class App extends Component {
           <Header addTodo={this.addTodo} />
           <List todos={todos} updateTodo={this.updateTodo} deleteTodo={this.deleteTodo} />
           <Footer todos={todos} clearAllTodoDone={this.clearAllTodoDone} checkAllTodo={this.checkAllTodo} />
+          <button onClick={this.getTodoListData}>点击请求todolist数据</button>
+          <button onClick={this.getCarData}>点击请求汽车数据</button>
         </div>
       </div>
     )
