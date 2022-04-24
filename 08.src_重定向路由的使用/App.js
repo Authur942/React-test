@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Route, NavLink, Switch, Redirect } from 'react-router-dom'
+import { Link, Route, NavLink, Switch,Redirect } from 'react-router-dom'
 import Header from './components/Header'
 import About from './page/About'
 import Home from './page/Home'
@@ -40,10 +40,10 @@ export default class App extends Component {
                     2.href="./css/bootstrap.css" 把点替换成 %PUBLIC_URL% ， 但是只能在react脚手架中使用
                     3.使用hash路由模式 HashRouter
                   */}
-                  {/* exact是严格匹配路由也叫精准匹配，过度滥用会导致严重问题,有时候会影响二级路由的使用 */}
+                  {/* exact是严格匹配路由也叫精准匹配，过度滥用会导致严重问题 */}
                   <Route path={'/about'} component={About} />
                   <Route path={'/home'} component={Home} />
-                  <Redirect to='/about'></Redirect>
+                  <Redirect to='/home'></Redirect>
                 </Switch>
               </div>
             </div>

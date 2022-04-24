@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Route, NavLink, Switch, Redirect } from 'react-router-dom'
+import { Link, Route, NavLink, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import About from './page/About'
 import Home from './page/Home'
@@ -20,9 +20,12 @@ export default class App extends Component {
               {/* 原生的HTML中使用a标签跳转不同的页面 */}
               {/* <a className="list-group-item active" href="./about.html">About</a>
               <a className="list-group-item" href="./home.html">Home</a> */}
+
+
               {/* NavLink组件相比Link组件，会自动高亮被选中的组件，还新增了activeClassName属性 */}
               <MyNavLink to='/about'>About</MyNavLink>
-              <MyNavLink to='/home'>Home</MyNavLink>
+              {/* to='/home/a/b' 还是会映射到home 这是路由的模糊匹配*/}
+              <MyNavLink to='/home/a/b'>Home</MyNavLink>
             </div>
           </div>
           <div className="col-xs-6">
@@ -40,10 +43,9 @@ export default class App extends Component {
                     2.href="./css/bootstrap.css" 把点替换成 %PUBLIC_URL% ， 但是只能在react脚手架中使用
                     3.使用hash路由模式 HashRouter
                   */}
-                  {/* exact是严格匹配路由也叫精准匹配，过度滥用会导致严重问题,有时候会影响二级路由的使用 */}
-                  <Route path={'/about'} component={About} />
-                  <Route path={'/home'} component={Home} />
-                  <Redirect to='/about'></Redirect>
+                  {/* exact是严格匹配路由也叫精准匹配，过度滥用会导致严重问题 */}
+                  <Route exact path={'/about'} component={About} />
+                  <Route exact path={'/home'} component={Home} />
                 </Switch>
               </div>
             </div>
