@@ -24,23 +24,17 @@ export default class Message extends Component {
                   {/* <Link to={`/home/message/Details/${item.id}/${item.title}`}>{item.title}</Link> */}
 
                   {/* 向路由组件传递Search参数 */}
-                  {/* <Link to={`/home/message/Details/?id=${item.id}&title=${item.title}`}>{item.title}</Link> */}
-
-                  {/* 向路由组件传递Search参数 */}
-                  <Link replace to={{ pathname: '/home/message/details', state: { id: item.id, title: item.title } }}>{item.title}</Link>
+                  <Link to={`/home/message/Details/?id=${item.id}&title=${item.title}`}>{item.title}</Link>
                 </li>
               )
             })
           }
         </ul>
-        {/* 传递过来的params参数需要在路由组件声明接收 */}
+        {/* 传递几个参数需要在路由组件声明接收 */}
         {/* <Route replace path={`/home/message/Details/:id/:title`} component={Details}></Route> */}
 
         {/* 传递过来的Search不需要接收声明 */}
-        {/* <Route path={`/home/message/details`} component={Details}></Route> */}
-
-        {/* 传递过来的state不需要接收声明 */}
-        <Route path={`/home/message/details`} component={Details}></Route>
+        <Route replace path={`/home/message/Details`} component={Details}></Route>
       </div>
     )
   }
