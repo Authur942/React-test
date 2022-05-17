@@ -11,6 +11,7 @@ export default class Message extends Component {
       { id: '03', title: '消息3' }
     ]
   }
+
   render () {
     const { messageArr } = this.state
     return (
